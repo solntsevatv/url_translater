@@ -15,10 +15,35 @@ func NewUrlPostgres(db *sqlx.DB) *UrlPostgres {
 	return &UrlPostgres{db: db}
 }
 
+func (r *UrlPostgres) IsDBEmpty() (bool, error) {
+	var count int
+	query := fmt.Sprintf("SELECT count(*) FROM %s;", linksTable)
+	err := r.db.Get(&count, query)
+	if err != nil {
+		return true, err
+	}
+
+	if count == 0 {
+		return true, nil
+	} else {
+		return false, nil
+	}
+}
+
 func (r *UrlPostgres) GetNextUrlId() (int, error) {
 	var id int
+
+	is_empty, err := r.IsDBEmpty()
+	if err != nil {
+		return 0, err
+	}
+	if is_empty {
+		id = 1
+		return id, nil
+	}
+
 	query := fmt.Sprintf("SELECT last_value FROM %s_id_seq;", linksTable)
-	err := r.db.Get(&id, query)
+	err = r.db.Get(&id, query)
 	if err != nil {
 		return 0, err
 	}
