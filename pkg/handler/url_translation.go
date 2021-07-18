@@ -4,6 +4,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"github.com/sirupsen/logrus"
 	"github.com/solntsevatv/url_translater/internal/url_translater"
 )
 
@@ -24,6 +25,8 @@ func (h *Handler) longToShort(c *gin.Context) {
 	c.JSON(http.StatusOK, map[string]interface{}{
 		"url": short_url,
 	})
+
+	logrus.Info("short_url=", short_url, " was added in db")
 }
 
 func (h *Handler) ShortToLong(c *gin.Context) {
@@ -43,4 +46,6 @@ func (h *Handler) ShortToLong(c *gin.Context) {
 	c.JSON(http.StatusOK, map[string]interface{}{
 		"url": long_url,
 	})
+
+	logrus.Info("long_url=", long_url, " was gotten from db")
 }
