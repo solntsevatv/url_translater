@@ -5,6 +5,8 @@ import (
 	"github.com/solntsevatv/url_translater/pkg/repository"
 )
 
+//go:generate mockgen -destination=pkg/service/mocks_pkg/service.go  github.com/solntsevatv/url_translater/pkg/service UrlTranslation
+
 type UrlTranslation interface {
 	GetNextUrlId() (int, error)
 	CreateShortURL(long_url url_translater.LongURL) (string, error)

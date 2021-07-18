@@ -20,6 +20,12 @@ func (s *UrlTranslationService) GetNextUrlId() (int, error) {
 }
 
 func (s *UrlTranslationService) CreateShortURL(long_url url_translater.LongURL) (string, error) {
+	url_id, err := s.GetNextUrlId()
+	if err != nil {
+		return "", err
+	}
+	long_url.Id = url_id
+
 	short_url := TranslateLongToShort(long_url)
 
 	return s.repo.CreateShortURL(url_translater.URL{
