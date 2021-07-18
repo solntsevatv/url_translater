@@ -3,8 +3,7 @@ run:
 	./url_translater
 
 build:
-	# go mod download && 
-	go build -o url_translater ./cmd/main.go
+	go mod download && go build -o url_translater ./cmd/main.go
 
 test:
 	go test -v -race -timeout 30s ./...
