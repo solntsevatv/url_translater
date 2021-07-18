@@ -1,9 +1,10 @@
 .PHONY: build, test, run, migrate_up, migrate_down
 run: 
-	go run cmd/main.go 
+	./url_translater
 
 build:
-	go build -v cmd/main.go 
+	# go mod download && 
+	go build -o url_translater ./cmd/main.go
 
 test:
 	go test -v -race -timeout 30s ./...
