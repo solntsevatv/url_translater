@@ -1,5 +1,5 @@
 # url translater
-Link shortener: test task for ozon <br/> 
+Link shortener<br/> 
 Сервис сокращения ссылок. В качестве хранилища используется postgresql, сервис реализован фреймворком gin. Короткие ссылки основываются на id записи(sequence) в БД, переведённой в систему счисления с алфавитом [A-Za-z0-9]
 
 ## API
